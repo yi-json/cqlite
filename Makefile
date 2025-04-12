@@ -37,7 +37,7 @@ clean:
 	rm -rf $(OBJ_DIR) $(TARGET) *.db
 
 # Run tests (assuming you have RSpec configured)
-test: $(TARGET)
+test: db
 	bundle exec rspec
 
 # Format all C and header files using clang-format
