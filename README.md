@@ -32,6 +32,7 @@ don't look it's not finished yet
     * Done via a **pager**, which asks for page number x, and the pager gives us back a block of memory
     * First, it looks in its cache and on a cache miss, it copies data from disk into memory
     * When the user closes the connection to the db, we flush the cache to disk, close the DB file, and free the memory for Pager/Table data structures
+* Cursor: represents a location in the table
 
 
 # C Trivia

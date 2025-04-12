@@ -125,10 +125,6 @@ void db_close(Table* table) {
   free(table);
 }
 
-void free_table(Table* table) {
-    // TODO
-}
-
 void* get_page(Pager* pager, uint32_t page_num) {
     // handles cache misses; we assume pages are saved one after the other in the db file
     // i.e. page 0 at offset 0, page 1 at offset 4096, page 2 at offset 8192, etc
@@ -162,18 +158,10 @@ void* get_page(Pager* pager, uint32_t page_num) {
   return pager->pages[page_num];
 }
 
-void* row_slot(Table* table, uint32_t row_num) {
-    uint32_t page_num = row_num / ROWS_PER_PAGE;
-    void* page = get_page(table->pager, page_num);
-    uint32_t row_offset = row_num % ROWS_PER_PAGE;
-    uint32_t byte_offset = row_offset * ROW_SIZE;
-    return page + byte_offset;
-}
-
 void serialize_row(Row* source, void* destination) {
     memcpy(destination + ID_OFFSET, &(source->id), ID_SIZE);
-    strncpy(destination + USERNAME_OFFSET, &(source->username), USERNAME_SIZE);
-    strncpy(destination + EMAIL_OFFSET, &(source->email), EMAIL_SIZE);
+    strncpy(destination + USERNAME_OFFSET, source->username, USERNAME_SIZE);
+    strncpy(destination + EMAIL_OFFSET, source->email, EMAIL_SIZE);
 }
 
 void deserialize_row(void* source, Row* destination) {

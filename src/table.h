@@ -2,6 +2,7 @@
 #include <stdint.h>
 #include "common.h"
 #include "statement.h"
+#include "cursor.h"
 
 #define size_of_attribute(Struct, Attribute) sizeof(((Struct*)0)->Attribute)
 #define TABLE_MAX_PAGES 100
@@ -23,7 +24,7 @@ typedef struct {
     void* pages[TABLE_MAX_PAGES];
 } Pager;
 
-typedef struct {
+typedef struct Table {
     Pager* pager;
     uint32_t num_rows;
 } Table;
@@ -32,8 +33,6 @@ Pager* pager_open(const char* filename);
 void pager_flush(Pager* pager, uint32_t page_num, uint32_t size);
 Table* db_open(const char* filename);
 void db_close(Table* table);
-void free_table(Table* table);
 void* get_page(Pager* pager, uint32_t page_num);
-void* row_slot(Table* table, uint32_t row_num);
 void serialize_row(Row* source, void* destination);
 void deserialize_row(void* source, Row* destination);
