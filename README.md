@@ -26,3 +26,13 @@ gem install rspec --user-install
 
 # Introduction
 don't look it's not finished yet
+
+# Features
+* Persistence to disk: we can save the database to a file and read it back out again
+    * Done via a **pager**, which asks for page number x, and the pager gives us back a block of memory
+    * First, it looks in its cache and on a cache miss, it copies data from disk into memory
+    * When the user closes the connection to the db, we flush the cache to disk, close the DB file, and free the memory for Pager/Table data structures
+
+
+# C Trivia
+### Difference between `memcpy()` and `strncpy()`

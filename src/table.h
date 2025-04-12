@@ -18,12 +18,22 @@ extern const uint32_t ROWS_PER_PAGE;
 extern const uint32_t TABLE_MAX_ROWS;
 
 typedef struct {
-    uint32_t num_rows;
+    int file_descriptor;
+    uint32_t file_length;
     void* pages[TABLE_MAX_PAGES];
+} Pager;
+
+typedef struct {
+    Pager* pager;
+    uint32_t num_rows;
 } Table;
 
-Table* new_table();
+Pager* pager_open(const char* filename);
+void pager_flush(Pager* pager, uint32_t page_num, uint32_t size);
+Table* db_open(const char* filename);
+void db_close(Table* table);
 void free_table(Table* table);
+void* get_page(Pager* pager, uint32_t page_num);
 void* row_slot(Table* table, uint32_t row_num);
 void serialize_row(Row* source, void* destination);
 void deserialize_row(void* source, Row* destination);
