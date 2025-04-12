@@ -1,0 +1,7 @@
+{
+    "files.associations": {
+        "statement.h": "c",
+        "__locale": "cpp",
+        "locale": "cpp"
+    }
+}
