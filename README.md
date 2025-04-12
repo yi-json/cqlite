@@ -1,4 +1,4 @@
-# Setup + Installation (for testing)
+# Setup + Installation
 Installing Ruby
 ```
 brew update
