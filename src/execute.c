@@ -9,14 +9,15 @@ void print_row(Row* row) {
 
 ExecuteResult execute_insert(Statement* statement, Table* table) {
     // allows us to read/write from our table structure
-    if (table->num_rows >= TABLE_MAX_ROWS) {
+    void* node = get_page(table->pager, table->root_page_num);
+    if ((*leaf_node_num_cells(node) >= LEAF_NODE_MAX_CELLS)) {
         return EXECUTE_TABLE_FULL;
     }
 
     Row* row_to_insert = &(statement->row_to_insert);
     Cursor* cursor = table_end(table);
-    serialize_row(row_to_insert, cursor_value(cursor));
-    table->num_rows++;
+
+    leaf_node_insert(cursor, row_to_insert->id, row_to_insert);
 
     free(cursor);
     

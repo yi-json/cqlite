@@ -28,12 +28,24 @@ gem install rspec --user-install
 don't look it's not finished yet
 
 # Features
-* Persistence to disk: we can save the database to a file and read it back out again
+* <u>Persistence to disk</u>: we can save the database to a file and read it back out again
     * Done via a **pager**, which asks for page number x, and the pager gives us back a block of memory
     * First, it looks in its cache and on a cache miss, it copies data from disk into memory
     * When the user closes the connection to the db, we flush the cache to disk, close the DB file, and free the memory for Pager/Table data structures
-* Cursor: represents a location in the table
+* <u>Cursor</u>: represents a location in the table
+* <u>B-Tree</u>: Data structure that represents both tables and indexes
+    * Each node corresponds to one page, even if it's not full, so no need to handle for partial pages
+    * *Order*: each node can have up to m children, where m is the tree's "order"
+    * *Nodes with Children*:
+
 
 
 # C Trivia
 ### Difference between `memcpy()` and `strncpy()`
+
+### Unsigned types
+When including `#include <stdint.h>`, we have:
+* `uint8_t` → unsigned 8-bit integer
+* `uint16_t` → unsigned 16-bit integer
+* `uint32_t` → unsigned 32-bit integer
+* `uint64_t` → unsigned 64-bit integer
