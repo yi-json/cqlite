@@ -6,6 +6,7 @@
         "common.h": "c",
         "node.h": "c",
         "table.h": "c",
-        "stdint.h": "c"
+        "stdint.h": "c",
+        "stdio.h": "c"
     }
 }
