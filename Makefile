@@ -14,7 +14,7 @@ OBJS = $(OBJ_DIR)/main.o \
        $(OBJ_DIR)/execute.o \
        $(OBJ_DIR)/table.o \
        $(OBJ_DIR)/cursor.o \
-       $(OBJ_DIR)/node.o    # ✅ added node.o
+       $(OBJ_DIR)/node.o
 
 TARGET = db
 

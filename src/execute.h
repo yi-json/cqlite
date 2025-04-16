@@ -1,6 +1,7 @@
 #pragma once
 #include "common.h"
 #include "table.h"
+#include "cursor.h"
 
 typedef enum { 
     EXECUTE_SUCCESS,

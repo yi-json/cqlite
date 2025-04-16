@@ -2,6 +2,8 @@
 #include <stdint.h>
 #include "common.h"
 #include "statement.h"
+#include "node.h"
+
 
 #define ID_SIZE sizeof(((Row*)0)->id)
 #define USERNAME_SIZE sizeof(((Row*)0)->username)
@@ -36,3 +38,5 @@ void db_close(Table* table);
 void* get_page(Pager* pager, uint32_t page_num);
 void serialize_row(Row* source, void* destination);
 void deserialize_row(void* source, Row* destination);
+uint32_t get_unused_page_num(Pager* pager);
+void create_new_root(Table* table, uint32_t right_child_page_num);

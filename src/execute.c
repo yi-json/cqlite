@@ -1,7 +1,5 @@
 #include <stdio.h>
 #include "execute.h"
-#include "table.h"
-#include "cursor.h"
 
 void print_row(Row* row) {
     printf("(%d, %s, %s)\n", row->id, row->username, row->email);
@@ -11,9 +9,6 @@ ExecuteResult execute_insert(Statement* statement, Table* table) {
     // allows us to read/write from our table structure
     void* node = get_page(table->pager, table->root_page_num);
     uint32_t num_cells = *leaf_node_num_cells(node);
-    if (num_cells >= LEAF_NODE_MAX_CELLS) {
-        return EXECUTE_TABLE_FULL;
-    }
 
     Row* row_to_insert = &(statement->row_to_insert);
     uint32_t key_to_insert = row_to_insert->id;
